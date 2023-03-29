@@ -127,3 +127,10 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# Ignore .idea files
+.idea/
+
+#ignore text documents
+*.pdf
+*.docx
