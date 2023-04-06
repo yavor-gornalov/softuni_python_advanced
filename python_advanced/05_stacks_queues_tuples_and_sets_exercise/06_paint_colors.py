@@ -1,7 +1,5 @@
 # # https://judge.softuni.org/Contests/Practice/Index/3159#5
 
-from collections import deque
-
 main_colors = {"red", "yellow", "blue"}
 secondary_colors = {"orange", "purple", "green"}
 color_combos = {
