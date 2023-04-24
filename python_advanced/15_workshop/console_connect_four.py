@@ -1,6 +1,6 @@
 MIN_SIZE, MAX_SIZE = 3, 99
-PLAYER = {1: "@", 2: "#"}
-EMPTY = "-"
+PLAYER = {1: "X", 2: "O"}
+EMPTY = "."
 
 
 def input_field(low_limit, up_limit, text="Enter a value:"):
@@ -12,10 +12,10 @@ def init_playground(rows: int, cols: int):
     return field
 
 
-def plot_playground(field, sep=" "):
-    rows = len(field)
+def plot_playground(field, sep="  "):
+    rows, cols = len(field), len(field[0])
     [print(*field[r], sep=sep) for r in range(rows)]
-    print()
+    print(*[i for i in range(1, cols + 1)], sep=sep)
 
 
 def player_move(field, player):
