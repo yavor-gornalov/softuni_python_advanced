@@ -1,6 +1,3 @@
-BOARD_SIZE = 3
-
-
 class Player:
     def __init__(self, name, symbol):
         self.name = name
@@ -30,7 +27,7 @@ def get_players():
     return Player(first_player_name, first_player_symbol), Player(second_player_name, second_player_symbol)
 
 
-def setup_board(matrix=None, size=BOARD_SIZE):
+def setup_board(matrix=None, size=3):
     global first_player
     if not matrix:
         matrix, number = [], 0
@@ -44,6 +41,7 @@ def setup_board(matrix=None, size=BOARD_SIZE):
         [print(f"|  {'  |  '.join(matrix[i])}  |") for i in range(size)]
         print(f"{first_player.name} starts first!")
     else:
+        size = len(matrix)
         for i in range(size):
             row = [matrix[i][j] if not matrix[i][j].isdigit() else ' ' for j in range(size)]
             print(f"|  {'  |  '.join(row)}  |")
@@ -51,7 +49,39 @@ def setup_board(matrix=None, size=BOARD_SIZE):
     return matrix
 
 
-first_player, second_player = get_players()
-board = setup_board()
+def player_move(matrix, player):
+    size = len(matrix)
+    board_positions, key = {}, 0
+    for i in range(size):
+        for j in range(size):
+            key += 1
+            board_positions[key] = (i, j)
 
-setup_board(board)
+    while True:
+        try:
+            position = int(input(f"{player.name}, choose a free position [1-{size ** 2}]: "))
+
+            if position not in board_positions:
+                raise ValueError
+            r, c = board_positions[position]
+
+            if matrix[r][c] in "XO":
+                raise ValueError
+            matrix[r][c] = player.symbol
+            break
+
+        except ValueError:
+            print("Invalid position!")
+
+    return matrix
+
+
+# first_player, second_player = get_players()
+first_player, second_player = Player("Yavor", "X"), Player("Rally", "O")
+board = setup_board(size=3)
+
+while True:
+    player_move(board, first_player)
+    setup_board(board)
+
+    first_player, second_player = second_player, first_player
