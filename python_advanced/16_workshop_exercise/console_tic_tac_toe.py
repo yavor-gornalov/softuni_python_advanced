@@ -28,7 +28,7 @@ def get_players():
 
 
 def setup_board(matrix=None, size=3):
-    global first_player
+    global current_player
     if not matrix:
         matrix, number = [], 0
         for i in range(size):
@@ -39,7 +39,7 @@ def setup_board(matrix=None, size=3):
             matrix.append(row)
         print("This is numeration of the board:")
         [print(f"|  {'  |  '.join(matrix[i])}  |") for i in range(size)]
-        print(f"{first_player.name} starts first!")
+        print(f"{current_player.name} starts first!")
     else:
         size = len(matrix)
         for i in range(size):
@@ -66,7 +66,8 @@ def player_move(matrix, player):
             r, c = board_positions[position]
 
             if matrix[r][c] in "XO":
-                raise ValueError
+                print("This field is already occupied!")
+                continue
             matrix[r][c] = player.symbol
             break
 
@@ -76,12 +77,53 @@ def player_move(matrix, player):
     return matrix
 
 
-# first_player, second_player = get_players()
-first_player, second_player = Player("Yavor", "X"), Player("Rally", "O")
-board = setup_board(size=3)
+def check_winner(matrix, player):
+    size = len(matrix)
 
-while True:
-    player_move(board, first_player)
+    row_winner = False
+    for i in range(size):
+        if all([symbol == player.symbol for symbol in matrix[i]]):
+            row_winner = True
+            break
+
+    col_winner = False
+    for j in range(size):
+        col = []
+        for i in range(size):
+            col.append(matrix[i][j])
+        if all([symbol == player.symbol for symbol in col]):
+            col_winner = True
+            break
+
+    diagonal_winner = False
+    left_diagonal = [matrix[i][i] for i in range(size)]
+    right_diagonal = [matrix[i][size - i - 1] for i in range(size)]
+
+    for diagonal in left_diagonal, right_diagonal:
+        if all([symbol == player.symbol for symbol in diagonal]):
+            diagonal_winner = True
+            break
+
+    if any([row_winner, col_winner, diagonal_winner]):
+        print(f"{player.name} has won this game!")
+        return True
+
+    return False
+
+
+BOARD_SIZE = 3
+
+current_player, second_player = get_players()
+# first_player, second_player = Player("First", "X"), Player("Second", "O")
+board = setup_board(size=BOARD_SIZE)
+
+possible_moves = BOARD_SIZE ** 2
+while possible_moves:
+    player_move(board, current_player)
     setup_board(board)
-
-    first_player, second_player = second_player, first_player
+    if check_winner(board, current_player):
+        break
+    current_player, second_player = second_player, current_player
+    possible_moves -= 1
+else:
+    print("No winner in this game!")
