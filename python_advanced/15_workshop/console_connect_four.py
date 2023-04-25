@@ -3,8 +3,16 @@ PLAYER = {1: "X", 2: "O"}
 EMPTY = "."
 
 
-def input_field(low_limit, up_limit, text="Enter a value:"):
-    pass
+def read_settings(low_limit, up_limit, text="Enter a value: "):
+    while True:
+        try:
+            setting = int(input(text))
+            if low_limit <= setting <= up_limit:
+                break
+            raise ValueError
+        except ValueError:
+            print("Please enter a valid number")
+    return setting
 
 
 def init_playground(rows: int, cols: int):
@@ -14,8 +22,10 @@ def init_playground(rows: int, cols: int):
 
 def plot_playground(field, sep="  "):
     rows, cols = len(field), len(field[0])
+    print()
     [print(*field[r], sep=sep) for r in range(rows)]
-    print(*[i for i in range(1, cols + 1)], sep=sep)
+    print()
+    # print(*[i for i in range(1, cols + 1)], sep=" " * len(sep))
 
 
 def player_move(field, player):
@@ -99,36 +109,27 @@ def check_winning_combination(field, player, row, col):
         return player
 
 
-while True:
-    try:
-        playground_rows = int(input(f"Enter number of playground rows[{MIN_SIZE}-{MAX_SIZE}]: "))
-        playground_cols = int(input(f"Enter number of playground cols[{MIN_SIZE}-{MAX_SIZE}]: "))
-        winning_sequence = int(input("Enter number of winning sequence: "))
-
-        if not MIN_SIZE <= playground_rows <= MAX_SIZE or not MIN_SIZE <= playground_cols <= MAX_SIZE:
-            continue
-
-        if winning_sequence > max(playground_rows, playground_cols):
-            print(f"Winning sequence should be less than {max(playground_rows, playground_cols)}!")
-            continue
-
-    except ValueError:
-        print("Please enter a valid number")
-    else:
-        break
+playground_rows = read_settings(MIN_SIZE, MAX_SIZE, f"Enter number of playground rows[{MIN_SIZE}-{MAX_SIZE}]: ")
+playground_cols = read_settings(MIN_SIZE, MAX_SIZE, f"Enter number of playground cols[{MIN_SIZE}-{MAX_SIZE}]: ")
+winning_sequence = read_settings(
+    MIN_SIZE, min(playground_rows, playground_cols),
+    f"Enter number of winning sequence[{MIN_SIZE}-{min(playground_rows, playground_cols)}]: ")
 
 playground = init_playground(playground_rows, playground_cols)
-plot_playground(playground)
+plot_playground(playground, sep="  |  ")
 
 current_player, next_player = 1, 2
-winner = None
-while True:
+winner, turn = None, 0
+possible_moves = playground_rows * playground_cols
+while turn < possible_moves:
     result = player_move(playground, current_player)
     if result:
-        plot_playground(playground)
+        plot_playground(playground, sep="  |  ")
         winner = check_winning_combination(playground, current_player, result[0], result[1])
     if winner:
         print(f"Player {current_player} has won this game!")
         break
-
     current_player, next_player = next_player, current_player
+    turn += 1
+else:
+    print("No winner in this game!")
