@@ -1,3 +1,6 @@
+BOARD_SIZE = 3
+
+
 class Player:
     def __init__(self, name, symbol):
         self.name = name
@@ -27,4 +30,28 @@ def get_players():
     return Player(first_player_name, first_player_symbol), Player(second_player_name, second_player_symbol)
 
 
+def setup_board(matrix=None, size=BOARD_SIZE):
+    global first_player
+    if not matrix:
+        matrix, number = [], 0
+        for i in range(size):
+            row = []
+            for j in range(size):
+                number += 1
+                row.append(str(number))
+            matrix.append(row)
+        print("This is numeration of the board:")
+        [print(f"|  {'  |  '.join(matrix[i])}  |") for i in range(size)]
+        print(f"{first_player.name} starts first!")
+    else:
+        for i in range(size):
+            row = [matrix[i][j] if not matrix[i][j].isdigit() else ' ' for j in range(size)]
+            print(f"|  {'  |  '.join(row)}  |")
+
+    return matrix
+
+
 first_player, second_player = get_players()
+board = setup_board()
+
+setup_board(board)
