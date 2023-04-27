@@ -2,7 +2,7 @@ operations_mapper = {
     "+": lambda a, b: a + b,
     "-": lambda a, b: a - b,
     "*": lambda a, b: a * b,
-    "/": lambda a, b: a / b if b != 0 else None,
+    "/": lambda a, b: a / b,
     "^": lambda a, b: a ** b,
 }
 
