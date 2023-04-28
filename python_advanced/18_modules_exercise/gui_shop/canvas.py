@@ -6,25 +6,18 @@ dimensions = f"{width}x{height}"
 
 
 def create_root():
-    root = tk.Tk()
-    root.title("GUI shop")
-    root.geometry(dimensions)
-    create_frame(root)
+    window = tk.Tk()
+    window.title("GUI shop")
+    window.geometry(dimensions)
 
-    return root
-
-
-def create_frame(root):
-    frame = tk.Canvas(root, width=width, height=height)
-    frame.grid(row=0, column=0)
-
-    return frame
+    return window
 
 
-def get_frame_height(): return height
+def create_frame(wdw):
+    fr = tk.Canvas(root, width=width, height=height)
+    fr.grid(row=0, column=0)
 
-
-def get_frame_width(): return width
+    return fr
 
 
 root = create_root()
