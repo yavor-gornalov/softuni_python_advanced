@@ -45,17 +45,29 @@ def get_users_data():
     return users
 
 
-def put_user_data(user):
+def put_user_data(new_user):
+    next_id = 0
+    if os.path.exists(USERS_PATH):
+        with open(USERS_PATH, "r") as file:
+            last_record = file.readlines()
+        if len(last_record) > 0:
+            next_id = loads(last_record[-1])["id"]
+
     with open(USERS_PATH, "a") as file:
-        dump(user, file)
+        new_user["id"] = next_id + 1
+        dump(new_user, file)
         file.write("\n")
 
 
 def register():
     new_user = get_form_data()
     users = get_users_data()
-    if new_user["username"] not in users:
-        put_user_data(new_user)
+    for user in users:
+        if new_user["username"] == user["username"]:
+            return False
+
+    put_user_data(new_user)
+    return True
 
 
 username = tk.Entry(root)
