@@ -1,7 +1,10 @@
 import os
+from json import loads, dump
 import tkinter as tk
 from canvas import root, frame
 from helpers import clear_screen
+
+USERS_PATH = "./db/users.txt"
 
 
 def render_registration():
@@ -23,13 +26,36 @@ def render_registration():
     frame.create_window(240, 250, window=back_button, width=80)
 
 
-def login():
-    path = "./db/users.txt"
-    if os.path.exists(path):
-        with open(path, "r") as file:
-            print(file.read())
-    # with open(path, "a") as file:
-    #     file.write("test")
+def get_form_data():
+    form_data = {
+        "username": username.get(),
+        "email": email.get(),
+        "password": password.get(),
+        "confirm_password": confirm_password.get()
+    }
+    return form_data
+
+
+def get_users_data():
+    users = []
+    if os.path.exists(USERS_PATH):
+        with open(USERS_PATH, "r") as file:
+            for user in file:
+                users.append(loads(user))
+    return users
+
+
+def put_user_data(user):
+    with open(USERS_PATH, "a") as file:
+        dump(user, file)
+        file.write("\n")
+
+
+def register():
+    new_user = get_form_data()
+    users = get_users_data()
+    if new_user["username"] not in users:
+        put_user_data(new_user)
 
 
 username = tk.Entry(root)
@@ -42,7 +68,7 @@ register_button = tk.Button(
     text="Register",
     bg="green",
     fg="white",
-    command=lambda: print("register button"),
+    command=register,
 )
 
 back_button = tk.Button(
@@ -50,5 +76,5 @@ back_button = tk.Button(
     text="Back",
     bg="grey",
     fg="white",
-    command=lambda: print("back button"),
+    command=lambda: print("BACK button"),
 )
