@@ -1,6 +1,9 @@
 # https://judge.softuni.org/Contests/Practice/Index/1830#0
 
-stack = list(input())
+text = list(input())
+stack = []
 
-while stack:
-    print(stack.pop(), end="")
+for i in range(len(text)):
+    stack.append(text.pop())
+
+print("".join(stack))
