@@ -133,4 +133,4 @@ dmypy.json
 
 #ignore text documents
 *.pdf
-*.docx
+*.doc*
