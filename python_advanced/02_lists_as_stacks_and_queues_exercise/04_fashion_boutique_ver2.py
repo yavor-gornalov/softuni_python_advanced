@@ -4,15 +4,15 @@ from collections import deque
 
 cloths = deque([int(x) for x in input().split()])
 rack_capacity = int(input())
-rack = deque()
 
-racks_count = 1
+counter = 1
+current_capacity = rack_capacity
 while cloths:
-    clothing = cloths.pop()
-    rack.append(clothing)
-    if sum(rack) > rack_capacity:
-        racks_count += 1
-        rack.clear()
-        rack.append(clothing)
+    current_cloth = cloths.pop()
+    if current_cloth <= current_capacity:
+        current_capacity -= current_cloth
+    else:
+        current_capacity = rack_capacity - current_cloth
+        counter += 1
 
-print(racks_count)
+print(counter)
