@@ -1,17 +1,43 @@
 from abc import abstractmethod, ABC
 
 
+class BaseFlyingObject:
+    FLY_LIMIT = 50
+
+    def __init__(self):
+        self.__height = 0
+
+    def fly(self):
+        self.height += 1
+
+    def land(self):
+        self.height = 0
+
+    @property
+    def height(self):
+        return self.__height
+
+    @height.setter
+    def height(self, value):
+        if value < self.FLY_LIMIT:
+            self.__height = value
+        else:
+            self.land()
+
+
+class BaseWalkingObject(ABC):
+    @abstractmethod
+    def walk(self):
+        pass
+
+
 class Duck(ABC):
+    def __init__(self, name: str):
+        self.name = name
+
     @staticmethod
+    @abstractmethod
     def quack():
-        pass
-
-    @staticmethod
-    def walk():
-        pass
-
-    @staticmethod
-    def fly():
         pass
 
 
@@ -20,42 +46,28 @@ class RubberDuck(Duck):
     def quack():
         return "Squeek"
 
-    @staticmethod
-    def walk():
-        """Rubber duck can walk only if you move it"""
-        raise Exception('I cannot walk by myself')
 
-    @staticmethod
-    def fly():
-        """Rubber duck can fly only if you throw it"""
-        raise Exception('I cannot fly by myself')
-
-
-class RobotDuck(Duck):
-    HEIGHT = 50
-
-    def __init__(self):
-        self.height = 0
+class RobotDuck(Duck, BaseWalkingObject, BaseFlyingObject):
+    def __init__(self, name):
+        Duck.__init__(self, name)
+        BaseFlyingObject.__init__(self)
 
     @staticmethod
     def quack():
         return 'Robotic quacking'
 
-    @staticmethod
-    def walk():
+    def walk(self):
         return 'Robotic walking'
 
-    def fly(self):
-        """can only fly to specific height but
-        when it reaches it starts landing automatically"""
-        if self.height == RobotDuck.HEIGHT:
-            self.land()
-        else:
-            self.height += 1
 
-    def land(self):
-        self.height = 0
+rubber_duck = RubberDuck("My Rubber Duck")
+robot_duck = RobotDuck("My Robot Duck")
 
+print(rubber_duck.quack())
+print(robot_duck.quack())
 
-
-
+print(robot_duck.walk())
+robot_duck.height = 49
+print(robot_duck.height)
+robot_duck.fly()
+print(robot_duck.height)
