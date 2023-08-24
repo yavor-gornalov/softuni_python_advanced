@@ -36,23 +36,34 @@ class Library:
         self.books: List[Book] = []
         self.location = location
 
-    def __find_book(self, book_title):
+    def _get_book(self, book_title):
         for current_book in self.books:
             if current_book.title == book_title:
                 return current_book
+        raise ValueError(f"The book '{book_title}' does not exit")
+
+    def find_book(self, book_title):
+        try:
+            self._get_book(book_title)
+            return f"The book {book_title} founded"
+        except ValueError:
+            return f"No such book in the Library"
 
     def add_book(self, book: Book):
-        if self.__find_book(book.title):
-            raise ValueError("This book already exists")
-        self.books.append(book)
-        return f"The book '{book.title}' successfully added"
+        try:
+            self._get_book(book.title)
+            return "This book already exists"
+        except ValueError:
+            self.books.append(book)
+            return f"The book '{book.title}' successfully added"
 
-    def remove_book(self, book_name):
-        current_book = self.__find_book(book_name)
-        if not current_book:
-            raise ValueError(f"The book '{book_name}' does not exit")
-        self.books.remove(current_book)
-        return f"The book '{book_name}' successfully removed"
+    def remove_book(self, book_title):
+        try:
+            book = self._get_book(book_title)
+            self.books.remove(book)
+            return f"The book '{book_title}' successfully removed"
+        except ValueError:
+            return f"The book '{book_title}' does not exit"
 
     def get_info(self):
         books = '\n'.join([f"{b.title} by {b.author} - {b.pages}" for b in self.books])
@@ -60,30 +71,24 @@ class Library:
         return result
 
 
-book = Book("My First Book", "Me", 100)
-book2 = Book("My Second Book", "Me", 100)
-book3 = Book("My Third Book", "Me", 100)
-
-# print(book.open_book())
-# print(book.goto_page(99))
-# print(book.next_page())
-# print(book.next_page())
-# print(book.previous_page())
-# print(book.close_book())
+my_book = Book("My First Book", "Me", 100)
+my_book2 = Book("My Second Book", "Me", 100)
+my_book3 = Book("My Third Book", "Me", 100)
 
 library = Library("University")
-library.add_book(book)
-try:
-    library.add_book(book)
-except ValueError as e:
-    print(*e.args)
-library.add_book(book2)
-library.add_book(book3)
+library.add_book(my_book)
+print(library.add_book(my_book))
+print(library.add_book(my_book2))
+print(library.add_book(my_book3))
 print(library.get_info())
-try:
-    library.remove_book("My Book")
-except ValueError as e:
-    print(*e.args)
-
+print(library.remove_book("My Book"))
 print(library.remove_book("My Second Book"))
 print(library.get_info())
+
+print(library.find_book("My Third Book"))
+print(library.find_book("My Second Book"))
+book = library._get_book("My Third Book")
+print(my_book.open_book())
+print(my_book.goto_page(99))
+print(my_book.next_page())
+print(my_book.close_book())
