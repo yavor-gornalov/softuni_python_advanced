@@ -14,11 +14,11 @@ class Workable(ABC):
         pass
 
 
-class AbstractWorker(ABC):
+class BaseWorker(ABC):
     pass
 
 
-class Worker(AbstractWorker, Workable, Eatable):
+class Worker(BaseWorker, Workable, Eatable):
 
     def work(self):
         print("I'm normal worker. I'm working.")
@@ -28,7 +28,7 @@ class Worker(AbstractWorker, Workable, Eatable):
         time.sleep(5)
 
 
-class SuperWorker(AbstractWorker, Workable, Eatable):
+class SuperWorker(BaseWorker, Workable, Eatable):
 
     def work(self):
         print("I'm super worker. I work very hard!")
@@ -38,41 +38,46 @@ class SuperWorker(AbstractWorker, Workable, Eatable):
         time.sleep(3)
 
 
-class Robot(AbstractWorker, Workable):
+class Robot(BaseWorker, Workable):
 
     def work(self):
         print("I'm a robot. I'm working....")
 
 
-class Manager:
-
+class BaseManager:
     def __init__(self):
         self.worker = None
 
-    def set_worker(self, worker: AbstractWorker):
-        if not isinstance(worker, AbstractWorker):
-            raise AssertionError(f"`worker` must be of type AbstractWorker")
+    def set_worker(self, worker: BaseWorker):
+        if not isinstance(worker, BaseWorker):
+            raise AssertionError(f"`worker` must be of type BaseWorker")
         self.worker = worker
 
+
+class WorkManager(BaseManager):
     def manage(self):
         self.worker.work()
 
+
+class BreakManager(BaseManager):
     def lunch_break(self):
         self.worker.eat()
 
 
-manager = Manager()
-manager.set_worker(Worker())
-manager.manage()
-manager.lunch_break()
-
-manager.set_worker(SuperWorker())
-manager.manage()
-manager.lunch_break()
-
-manager.set_worker(Robot())
-manager.manage()
+work_manager = WorkManager()
+break_manager = BreakManager()
+work_manager.set_worker(Worker())
+break_manager.set_worker(Worker())
+work_manager.manage()
+break_manager.lunch_break()
+work_manager.set_worker(SuperWorker())
+break_manager.set_worker(SuperWorker())
+work_manager.manage()
+break_manager.lunch_break()
+work_manager.set_worker(Robot())
+work_manager.manage()
 try:
-    manager.lunch_break()
-except AttributeError:
+    break_manager.set_worker(Robot())
+    break_manager.lunch_break()
+except:
     pass
