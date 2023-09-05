@@ -45,11 +45,8 @@ class BankApp:
         loan = self._get_loan_by_type(loan_type)
         client = self._get_client_by_id(client_id)
 
-        exception_message = "Inappropriate loan type!"
-        if client.__class__.__name__ == "Student" and loan.__class__.__name__ != "StudentLoan":
-            raise Exception(exception_message)
-        if client.__class__.__name__ == "Adult" and loan.__class__.__name__ != "MortgageLoan":
-            raise Exception(exception_message)
+        if not self._check_if_loan_can_be_granted(client, loan):
+            raise Exception("Inappropriate loan type!")
 
         client.loans.append(loan)
         self.loans.remove(loan)
@@ -63,7 +60,7 @@ class BankApp:
             raise Exception("The client has loans! Removal is impossible!")
 
         self.clients.remove(client)
-        return f"Successfully removed {client.name} with ID {client_id}."
+        return f"Successfully removed {client.name} with ID {client.client_id}."
 
     def increase_loan_interest(self, loan_type: str):
         changed_loans = len([l.increase_interest_rate() for l in self.loans if l.__class__.__name__ == loan_type])
@@ -80,7 +77,7 @@ class BankApp:
         granted_sum = sum([sum([l.amount for l in c.loans]) for c in self.clients])
         loans_count_not_granted = len([l for l in self.loans])
         not_granted_sum = sum([l.amount for l in self.loans])
-        avg_client_interest_rate = sum(c.interest for c in self.clients) / len(self.clients) if self.clients else None
+        avg_client_interest_rate = sum(c.interest for c in self.clients) / len(self.clients) if self.clients else 0
         result = f"""Active Clients: {total_clients_count}
 Total Income: {total_clients_income:.2f}
 Granted Loans: {loans_count_granted_to_clients}, Total Sum: {granted_sum:.2f}
@@ -96,3 +93,11 @@ Average Client Interest Rate: {avg_client_interest_rate:.2f}"""
     def _get_loan_by_type(self, loan_type):
         collection = [l for l in self.loans if l.__class__.__name__ == loan_type]
         return collection[0] if collection else None
+
+    @staticmethod
+    def _check_if_loan_can_be_granted(client, loan):
+        if client.__class__.__name__ == "Student" and loan.__class__.__name__ != "StudentLoan":
+            return False
+        if client.__class__.__name__ == "Adult" and loan.__class__.__name__ != "MortgageLoan":
+            return False
+        return True
