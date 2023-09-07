@@ -11,7 +11,7 @@ class User:
 
     @username.setter
     def username(self, value: str):
-        if not value.strip():
+        if not value:
             raise ValueError("Invalid username!")
         self.__username = value
 
@@ -25,4 +25,17 @@ class User:
             raise ValueError("Users under the age of 6 are not allowed!")
         self.__age = value
 
-# TODO methods
+    def __str__(self):
+        result = [f"Username: {self.username}, Age: {self.age}", "Liked movies:"]
+        if not self.movies_liked:
+            result.append("No movies liked.")
+        else:
+            liked_movies_collection = [m.details() for m in self.movies_liked]
+            [result.append(m) for m in liked_movies_collection]
+        result.append("Owned movies:")
+        if not self.movies_owned:
+            result.append("No movies owned.")
+        else:
+            owned_movies_collection = [m.details() for m in self.movies_owned]
+            [result.append(m) for m in owned_movies_collection]
+        return "\n".join(result)

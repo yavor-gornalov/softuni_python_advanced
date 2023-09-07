@@ -18,7 +18,7 @@ class Movie(ABC):
 
     @title.setter
     def title(self, value: str):
-        if not value.strip():
+        if not value:
             raise ValueError("The title cannot be empty string!")
         self.__title = value
 
@@ -37,10 +37,15 @@ class Movie(ABC):
         return self.__owner
 
     @owner.setter
-    def owner(self, value):
+    def owner(self, value: User):
         if not isinstance(value, User):
             raise ValueError("The owner must be an object of type User!")
         self.__owner = value
+
+    @property
+    @abstractmethod
+    def age_limit(self):
+        pass
 
     @property
     def age_restriction(self):
@@ -48,11 +53,12 @@ class Movie(ABC):
 
     @age_restriction.setter
     def age_restriction(self, value: int):
-        if value < self.age_restriction:
+        if value < self.age_limit:
             # TODO implement age restriction rules
-            raise ValueError(
-                f"{self.__class__.__name__} movies must be restricted for audience under {self.age_restriction} years!")
+            raise ValueError(f"{self.__class__.__name__} movies must be restricted for "
+                             f"audience under {self.age_limit} years!")
         self.__age_restriction = value
 
     def details(self):
-        return f"{self.__class__.__name__} - Title:{self.title}, Year:{self.year}, Age restriction:{self.age_restriction}, Likes:{self.likes}, Owned by:{self.owner.username}"
+        return f"{self.__class__.__name__} - Title:{self.title}, Year:{self.year}, " \
+               f"Age restriction:{self.age_restriction}, Likes:{self.likes}, Owned by:{self.owner.username}"

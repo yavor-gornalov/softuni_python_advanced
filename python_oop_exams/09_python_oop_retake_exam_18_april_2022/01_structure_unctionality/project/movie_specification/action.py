@@ -7,3 +7,7 @@ class Action(Movie):
 
     def __init__(self, title: str, year: int, owner: User, age_restriction: int = DEFAULT_AGE_RESTRICTION):
         super().__init__(title, year, owner, age_restriction)
+
+    @property
+    def age_limit(self):
+        return Action.DEFAULT_AGE_RESTRICTION

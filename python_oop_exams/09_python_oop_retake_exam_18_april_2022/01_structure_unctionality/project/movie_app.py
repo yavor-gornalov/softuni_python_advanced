@@ -17,6 +17,7 @@ class MovieApp:
         self.registered_users.append(username)
         new_user = User(username, age)
         self.users_collection.append(new_user)
+        return f"{username} registered successfully."
 
     def upload_movie(self, username: str, movie: Movie):
         if username not in self.registered_users:
@@ -30,7 +31,7 @@ class MovieApp:
         movie.uploaded = True
         user.movies_owned.append(movie)
         self.movies_collection.append(movie)
-        return "Movie already added to the collection!"
+        return f"{user.username} successfully added {movie.title} movie."
 
     def delete_movie(self, username: str, movie: Movie):
         user = self._get_user_by_username(username)
@@ -70,6 +71,7 @@ class MovieApp:
             raise Exception(f"{username} has not liked the movie {movie.title}!")
         user.movies_liked.remove(movie)
         movie.likes -= 1
+        return f"{user.username} disliked {movie.title} movie."
 
     def display_movies(self):
         if not self.movies_collection:
@@ -93,9 +95,7 @@ class MovieApp:
 
     @staticmethod
     def _check_user_owns_movie(user: User, movie: Movie):
-        error_message = ""
         if not movie.uploaded:
-            error_message = f"The movie {movie.title} is not uploaded!"
+            return  f"The movie {movie.title} is not uploaded!"
         if movie not in user.movies_owned:
-            error_message = f"{user.username} is not the owner of the movie {movie.title}!"
-        return error_message
+            return f"{user.username} is not the owner of the movie {movie.title}!"
