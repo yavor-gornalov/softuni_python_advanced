@@ -23,7 +23,7 @@ class ManagingApp:
         return len(self.routes) + 1
 
     def register_user(self, first_name: str, last_name: str, driving_license_number: str):
-        if self._get_user_by_licence_plate(driving_license_number) is not None:
+        if self._get_user_by_diving_licence(driving_license_number) is not None:
             return f"{driving_license_number} has already been registered to our platform."
         new_user = User(first_name, last_name, driving_license_number)
         self.users.append(new_user)
@@ -48,13 +48,13 @@ class ManagingApp:
             else:
                 existing_route.is_locked = True
 
-        new_route = Route(start_point, end_point, length, route_id=self.next_route_id)
+        new_route = Route(start_point, end_point, length, self.next_route_id)
         self.routes.append(new_route)
         return f"{start_point}/{end_point} - {length} km is unlocked and available to use."
 
     def make_trip(self, driving_license_number: str, license_plate_number: str, route_id: int,
                   is_accident_happened: bool):
-        user = self._get_user_by_licence_plate(driving_license_number)
+        user = self._get_user_by_diving_licence(driving_license_number)
         vehicle = self._get_vehicle_by_license_plate(license_plate_number)
         route = self._get_route_by_id(route_id)
         if user.is_blocked:
@@ -73,7 +73,7 @@ class ManagingApp:
         return str(vehicle)
 
     def repair_vehicles(self, count: int):
-        collection = sorted([v for v in self.vehicles if v.is_damaged], key=lambda v: (v.model, v.brand))
+        collection = sorted([v for v in self.vehicles if v.is_damaged], key=lambda v: (v.brand, v.model))
 
         count_of_repaired_vehicles = 0
         for vehicle in collection[:count]:
@@ -89,7 +89,7 @@ class ManagingApp:
         return '\n'.join(result)
 
     # helpers
-    def _get_user_by_licence_plate(self, driving_license_number):
+    def _get_user_by_diving_licence(self, driving_license_number):
         collection = [u for u in self.users if u.driving_license_number == driving_license_number]
         return collection[0] if collection else None
 
