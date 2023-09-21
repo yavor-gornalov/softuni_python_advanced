@@ -1,33 +1,32 @@
-# https://judge.softuni.org/Contests/Practice/Index/3159#2
-
 from collections import deque
 
-chocolates = deque([int(x) for x in input().split(", ")])
-cups = deque([int(x) for x in input().split(", ")])
+chocolates = deque(int(x) for x in input().split(", "))
+cups_of_milk = deque(int(x) for x in input().split(", "))
 
-shakes_count = 0
-while chocolates and cups and shakes_count < 5:
+number_of_shakes = 0
+while chocolates and cups_of_milk and number_of_shakes < 5:
     chocolate = chocolates.pop()
-    cup = cups.popleft()
-
-    if cup <= 0 and chocolate <= 0:
+    milk = cups_of_milk.popleft()
+    if chocolate <= 0 and milk <= 0:
         continue
-    elif cup <= 0:
+    elif milk <= 0:
         chocolates.append(chocolate)
         continue
     elif chocolate <= 0:
-        cups.appendleft(cup)
+        cups_of_milk.appendleft(milk)
         continue
 
-    if cup == chocolate:
-        shakes_count += 1
+    if chocolate == milk:
+        number_of_shakes += 1
         continue
 
-    cups.append(cup)
-    chocolates.append(chocolate - 5)
+    chocolate -= 5
+    chocolates.append(chocolate)
+    cups_of_milk.append(milk)
 
-print("Great! You made all the chocolate milkshakes needed!") if shakes_count >= 5 else print("Not enough milkshakes.")
-
+if number_of_shakes == 5:
+    print("Great! You made all the chocolate milkshakes needed!")
+else:
+    print("Not enough milkshakes.")
 print(f"Chocolate: {', '.join(str(ch) for ch in chocolates)}") if chocolates else print("Chocolate: empty")
-
-print(f"Milk: {', '.join(str(c) for c in cups)}") if cups else print("Milk: empty")
+print(f"Milk: {', '.join(str(m) for m in cups_of_milk)}") if cups_of_milk else print("Milk: empty")
