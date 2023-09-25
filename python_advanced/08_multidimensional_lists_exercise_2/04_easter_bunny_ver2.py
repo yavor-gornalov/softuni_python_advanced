@@ -15,9 +15,9 @@ for r in range(size):
         bunny_position = r, line.index(BUNNY)
     matrix.append(line)
 
-max_direction = None
-max_egg_sequence = None
-max_eggs_collected = 0
+max_direction = ""
+max_egg_sequence = []
+max_eggs_collected = float("-inf")
 for direction, (r, c) in DIRECTIONS.items():
     current_eggs_counter = 0
     current_egg_sequence = []
@@ -25,13 +25,12 @@ for direction, (r, c) in DIRECTIONS.items():
     col = bunny_position[1] + c
     while 0 <= row < size and 0 <= col < size and matrix[row][col] != TRAP:
         eggs_value = int(matrix[row][col])
-        if eggs_value > 0:
-            current_eggs_counter += eggs_value
-            current_egg_sequence.append([row, col])
+        current_eggs_counter += eggs_value
+        current_egg_sequence.append([row, col])
         row += r
         col += c
 
-    if current_eggs_counter > max_eggs_collected:
+    if current_eggs_counter >= max_eggs_collected:
         max_eggs_collected = current_eggs_counter
         max_direction = direction
         max_egg_sequence = current_egg_sequence
