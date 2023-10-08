@@ -12,13 +12,12 @@ import os.path
 
 
 def create_file(f_name):
-    with open(f_name, "w"):
-        pass
+    open(f_name, "w").close()
 
 
-def append_to_file(f_name, cont):
+def append_to_file(f_name, f_content):
     with open(f_name, "a") as file:
-        file.writelines(cont + "\n")
+        file.writelines(f_content + "\n")
 
 
 def replace_text(f_name, old_str, new_str):
@@ -42,18 +41,34 @@ def delete_file(f_name):
         print("Delete: An error occurred")
 
 
+ACTIONS = {
+    "Create": create_file,
+    "Add": append_to_file,
+    "Replace": replace_text,
+    "Delete": delete_file
+}
+
+output_directory = "./files"
+os.makedirs(output_directory, exist_ok=True)
 while True:
     command = input()
     if command == "End":
         break
-
     action, filename, *args = command.split("-")
-    filename = "./files/" + filename
-    if action == "Create":
-        create_file(filename)
-    elif action == "Add":
-        append_to_file(filename, *args)
-    elif action == "Replace":
-        replace_text(filename, *args)
-    elif action == "Delete":
-        delete_file(filename)
+    filename = os.path.join(output_directory, filename)
+    if action not in ACTIONS:
+        continue
+    ACTIONS[action](filename, *args)
+
+"""
+TEST COMMANDS:
+Create-file.txt
+Add-file.txt-First Line
+Add-file.txt-Second Line
+Replace-random.txt-Some-some
+Replace-file.txt-First-1st
+Replace-file.txt-Second-2nd
+Delete-random.txt
+Delete-file.txt
+End
+"""

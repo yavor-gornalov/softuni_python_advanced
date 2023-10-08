@@ -4,17 +4,27 @@ and counts all the letters and punctuation marks.
 The result should be written to another text file.
 """
 
+import os
 from string import punctuation
 
-text_file_path = "./files/text.txt"
-output_file_path = "./files/output.txt"
+output_directory = "files"
+os.makedirs(output_directory, exist_ok=True)
+
+text_file_path = os.path.join(output_directory, "text.txt")
+output_file_path = os.path.join(output_directory, "output.txt")
+
+# recreate text.txt
+with open(text_file_path, "w") as file:
+    file.write("""-I was quick to judge him, but it wasn't his fault.
+-Is this some kind of joke?! Is it?
+-Quick, hide here. It is safer.""")
 
 with open(text_file_path, "r") as file:
     text = file.readlines()
 
 output = []
-letters, punctuation_marks = 0, 0
 for line_number, line in enumerate(text, 1):
+    letters, punctuation_marks = 0, 0
     for symbol in line:
         if symbol.isalpha():
             letters += 1
@@ -23,5 +33,6 @@ for line_number, line in enumerate(text, 1):
 
     output.append(f"Line {line_number}: {line.strip()} ({letters})({punctuation_marks})\n")
 
-with open(output_file_path, "w")as file:
+with open(output_file_path, "w") as file:
     file.writelines(output)
+print(f'File "{output_file_path}" - created!')
