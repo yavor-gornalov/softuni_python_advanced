@@ -1,4 +1,4 @@
-from project.cat import Car
+from project.car import Car
 
 
 class FamilyCar(Car):
