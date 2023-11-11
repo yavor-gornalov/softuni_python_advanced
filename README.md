@@ -1,6 +1,3 @@
-# python_advanced
-reserved for advanced and advanced oop course
-
 # Python Advanced - Module
 This repository contains solutions to tasks related to problems, solved during the study of "Python Advanced" - module at SoftUni. The tasks encompass more advanced and complex programming concepts such as tuples, stacks, queues, matrices, and also demonstrate basic concepts in object-oriented programming. Exercises are prepared for testing in Judge system. Problems explanations, could be accessed, after registration on this [LINK](https://judge.softuni.org/Contests#!/List/ByCategory/196/Python-Advanced).
 
