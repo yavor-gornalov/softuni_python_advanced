@@ -13,7 +13,7 @@ class Horse(ABC):
 
     @name.setter
     def name(self, value: str):
-        if len(value) < 4:
+        if len(value.strip()) < 4:
             raise ValueError(f"Horse name {value} is less than 4 symbols!")
         self.__name = value
 
@@ -38,4 +38,4 @@ class Horse(ABC):
         pass
 
     def train(self):
-        self.speed = max(self.speed + self.training_points, self.max_speed)
+        self.speed = min(self.speed + self.training_points, self.max_speed)

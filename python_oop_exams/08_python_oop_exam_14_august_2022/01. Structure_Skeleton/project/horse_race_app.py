@@ -20,12 +20,14 @@ class HorseRaceApp:
         return [x.race_type for x in self.horse_races]
 
     def add_horse(self, horse_type: str, horse_name: str, horse_speed: int):
+        if horse_type not in self.AVAILABLE_HORSE_TYPES:
+            return
         if self.__get_horse_by_name(horse_name):
             raise Exception(f"Horse {horse_name} has been already added!")
-        if horse_type in self.AVAILABLE_HORSE_TYPES:
-            new_horse = self.AVAILABLE_HORSE_TYPES[horse_type](horse_name, horse_speed)
-            self.horses.append(new_horse)
-            return f"{horse_type} horse {horse_name} is added."
+
+        new_horse = self.AVAILABLE_HORSE_TYPES[horse_type](horse_name, horse_speed)
+        self.horses.append(new_horse)
+        return f"{horse_type} horse {horse_name} is added."
 
     def add_jockey(self, jockey_name: str, age: int):
         if self.__get_jockey_by_name(jockey_name):
@@ -37,7 +39,7 @@ class HorseRaceApp:
 
     def create_horse_race(self, race_type: str):
         if race_type in self.race_types_created:
-            raise f"Race {race_type} has been already created!"
+            raise Exception(f"Race {race_type} has been already created!")
 
         new_race = HorseRace(race_type)
         self.horse_races.append(new_race)

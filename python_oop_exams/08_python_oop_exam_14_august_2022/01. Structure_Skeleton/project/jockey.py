@@ -10,7 +10,7 @@ class Jockey:
 
     @name.setter
     def name(self, value: str):
-        if not value.strip():
+        if value.strip() == "":
             raise ValueError("Name should contain at least one character!")
         self.__name = value
 
