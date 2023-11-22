@@ -19,20 +19,20 @@ class Car(ABC):
 
     @property
     @abstractmethod
-    def min_speed_limit(self):
+    def min_speed_limit(self) -> int:
         pass
 
     @property
     @abstractmethod
-    def max_speed_limit(self):
+    def max_speed_limit(self) -> int:
         pass
 
     @property
-    def speed_limit(self):
+    def speed_limit(self) -> int:
         return self.__speed_limit
 
     @speed_limit.setter
-    def speed_limit(self, value):
+    def speed_limit(self, value: int):
         if value < self.min_speed_limit or value > self.max_speed_limit:
             raise ValueError(f"Invalid speed limit! Must be between {self.min_speed_limit} and {self.max_speed_limit}!")
         self.__speed_limit = value

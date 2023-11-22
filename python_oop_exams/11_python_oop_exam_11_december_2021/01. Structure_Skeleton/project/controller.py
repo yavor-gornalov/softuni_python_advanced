@@ -49,16 +49,10 @@ class Controller:
         if not new_car:
             raise Exception(f"Car {car_type} could not be found!")
 
-        if driver.car is None:
-            driver.car = new_car
-            new_car.is_taken = True
-            return f"Driver {driver_name} chose the car {new_car.model}."
-
-        old_car = driver.car
-        old_car.is_taken = False
-        driver.car = new_car
-        new_car.is_taken = True
-        return f"Driver {driver_name} changed his car from {old_car.model} to {new_car.model}."
+        old_car = driver.attach_car(new_car)
+        if old_car:
+            return f"Driver {driver_name} changed his car from {old_car.model} to {new_car.model}."
+        return f"Driver {driver_name} chose the car {new_car.model}."
 
     def add_driver_to_race(self, race_name: str, driver_name: str):
         race = self.__find_item_by_name(race_name, self.races)
@@ -94,8 +88,13 @@ class Controller:
         return "\n".join(result)
 
     # HELPERS:
+
     def __find_car_by_type_and_model(self, car_type, model):
-        return next((c for c in self.cars if c.car_type == car_type and c.model == model), None)
+        return next((c for c in self.cars if c.model == model), None)
+
+    @staticmethod
+    def __find_item_by_name(name, collection):
+        return next((i for i in collection if i.name == name), None)
 
     def __find_last_free_car_by_type(self, car_type):
         car = None
@@ -103,7 +102,3 @@ class Controller:
             if current_car.car_type == car_type and not current_car.is_taken:
                 car = current_car
         return car
-
-    @staticmethod
-    def __find_item_by_name(name, collection):
-        return next((i for i in collection if i.name == name), None)
