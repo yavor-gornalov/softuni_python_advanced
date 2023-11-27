@@ -61,7 +61,7 @@ class BaseAquarium(ABC):
         return sum([f.price for f in self.fish]) + sum([d.price for d in self.decorations])
 
     def __str__(self):
-        fish_collection = ", ".join([f.name for f in self.fish]) if self.fish else "none"
+        fish_collection = " ".join([f.name for f in self.fish]) if self.fish else "none"
         return f"""{self.name}:
 Fish: {fish_collection}
 Decorations: {len(self.decorations)}
