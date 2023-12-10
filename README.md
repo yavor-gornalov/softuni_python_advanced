@@ -1,5 +1,5 @@
 # Python Advanced - Module
-This repository contains solutions to tasks related to problems, solved during the study of "Python Advanced" - module at SoftUni. The tasks encompass more advanced and complex programming concepts such as tuples, stacks, queues, matrices, and also demonstrate basic concepts in object-oriented programming. Exercises are prepared for testing in Judge system. Problems explanations, could be accessed, after registration on this [LINK](https://judge.softuni.org/Contests#!/List/ByCategory/196/Python-Advanced).
+This repository contains solutions to tasks related to problems solved during the study of the 'Python Advanced' module at SoftUni. The tasks encompass more advanced and complex programming concepts, such as tuples, stacks, queues, matrices, and also demonstrate basic concepts in object-oriented programming. Exercises are prepared for testing in the Judge system. Problem explanations can be accessed after registration at this [LINK](https://judge.softuni.org/Contests#!/List/ByCategory/196/Python-Advanced).
 
 ### Contents:
 **I. Python Advanced - Exercises**
@@ -13,6 +13,14 @@ This repository contains solutions to tasks related to problems, solved during t
   8. [Multidimensional Lists - Exercise 2](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_advanced/08_multidimensional_lists_exercise_2)
   9. [Functions Advanced - Lab](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_advanced/09_functions_advanced_lab)
   10. [Functions Advanced - Exercise](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_advanced/10_functions_advanced_exercise)
+  11. [Error Handling - Lab](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_advanced/11_error_handling_lab)
+  12. [Error Handling - Exercise](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_advanced/12_error_handling_exercise)
+  13. [File Handling - Lab](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_advanced/13_file_handling)
+  14. [File Handling - Exercise](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_advanced/14_file_handling_exercised)
+  15. [Workshop - Console Connect Four](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_advanced/15_workshop)
+  16. [Workshop - Tic Tac Toe](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_advanced/16_workshop_exercise)
+  17. [Modules - Lab](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_advanced/17_modules)
+  18. [Modules - Exercise](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_advanced/18_modules_exercise)
 
 **II. Python Advanced - Exams**
   1. [Python Advanced Retake Exam - 09 August 2023](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_advanced_exams/01_python_advanced_retake_exam_09_august_2023)
@@ -35,8 +43,45 @@ This repository contains solutions to tasks related to problems, solved during t
   18. [Python Advanced Exam - 27 June 2020](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_advanced_exams/18_python_advanced_exam_27_june_2020)
 
 **III. Python OOP - Exercises**
+  1. [First Steps in OOP - Lab](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop/01_first_steps_in_oop_lab)
+  2. [First Steps in OOP - Exercise](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop/02_first_steps_in_oop_exercise)
+  3. [Classes and Objects - Lab](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop/03_classes_and_objects_lab)
+  4. [Classes and Objects - Exercise](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop/04_classes_and_objects_exercise)
+  5. [Inheritance - Lab](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop/05_inheritance_lab)
+  6. [Inheritance - Exercise](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop/06_inheritance_exercise)
+  7. [Encapsulation - Lab](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop/07_encapsulation_lab)
+  8. [Encapsulation - Exercise](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop/08_encapsulation_exercise)
+  9. [Static and Class Methods - Lab](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop/09_static_and_class_methods_lab)
+  10. [Static and Class Methods - Exercise](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop/10_static_and_class_methods_exercise)
+  11. [Polymorphism and Abstraction - Lab](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop/11_polymorphism_and_abstraction_lab)
+  12. [Polymorphism and Abstraction - Exercise](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop/12_polymorphism_and_abstraction_exercise)
+  13. [SOLID - Lab](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop/13_SOLID_lab)
+  14. [SOLID - Exercise](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop/14_SOLID_exercise)
+  15. [Iterators and Generators - Lab](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop/15_iterators_and_generators_lab)
+  16. [Iterators and Generators - Exercise](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop/16_iterators_and_generators_exercise)
+  17. [Decorators - Lab](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop/17_decorators_lab)
+  18. [Decorators - Exercise](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop/18_decorators_exercise)
+  19. [Testing - Lab](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop/19_testing_lab)
+  20. [Testing - Exercise](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop/20_testing_exercise)
+  21. [Workshop - Custom List](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop/21_workshop)
 
 **IV. Python OOP - Exams**
+  1. [Python OOP Retake Exam - 15 August 2023](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop_exams/01_python_oop_retake_exam_15_august_2023)
+  2. [Python OOP Exam - 5 August 2023](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop_exams/02_python_oop_exam_5_august_2023)
+  3. [Python OOP Retake Exam - 18 April 2023](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop_exams/03_python_oop_retake_exam_18_april_2023)
+  4. [Python OOP Exam - 8 April 2023](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop_exams/04_python_oop_exam_8_april_2023)
+  5. [Python OOP Retake Exam - 19 December 2022](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop_exams/05_python_oop_retake_exam_19_december_2022)
+  6. [Python OOP Exam - 10 December 2022](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop_exams/06_python_oop_exam_10_december_2022)
+  7. [Python OOP Retake Exam - 22 August 2022](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop_exams/07_python_oop_retake_exam_22_august_2022)
+  8. [Python OOP Exam - 14 August 2022](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop_exams/08_python_oop_exam_14_august_2022)
+  9. [Python OOP Retake Exam - 18 April 2022](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop_exams/09_python_oop_retake_exam_18_april_2022)
+  10. [Python OOP Exam - 10 April 2022](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop_exams/10_python_oop_exam_10_april_2022)
+  11. [Python OOP Exam - 11 December 2021](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop_exams/11_python_oop_exam_11_december_2021)
+  12. [Python OOP Retake Exam - 23 August 2021](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop_exams/12_python_oop_retake_exam_23_august_2021)
+  13. [Python OOP Exam - 15 August 2021](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop_exams/13_python_oop_exam_15_august_2021)
+  14. [Python OOP Exam - 10 April 2021](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop_exams/14_python_oop_exam_10_april_2021)
+  15. [Python OOP Retake Exam - 22 Aug 2020](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop_exams/15_python_oop_retake_exam_22_aug_2020)
+  16. [Python OOP Exam - 16 Aug 2020](https://github.com/yavor-gornalov/softuni_python_advanced/tree/main/python_oop_exams/16_python_oop_exam_16_aug_2020)
 
 ### Useful links: 
   - https://softuni.bg/
